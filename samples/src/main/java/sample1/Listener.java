@@ -22,12 +22,11 @@ public class Listener {
   static boolean warned = false;
 
   @JmsListener(destination = Application.qName)
-  public void receiveMessage(byte[] msg) {
+  public void receiveMessage(Sample msg) {
     infinityWarning();
-    Integer i = new Integer(msg.length);
     System.out.println();
     System.out.println("========================================");
-    System.out.println("Received message is: "+i.toString());
+    System.out.println("Received message is: "+msg.foo);
     System.out.println("========================================");
 
   }
