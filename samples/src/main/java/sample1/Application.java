@@ -48,7 +48,7 @@ public class Application {
 
     // The default SimpleMessageConverter class will be called and turn a String
     // into a JMS TextMessage
-    jmsTemplate.convertAndSend(qName, msg);
+    jmsTemplate.convertAndSend(qName, msg.getBytes());
 
     status();
 
