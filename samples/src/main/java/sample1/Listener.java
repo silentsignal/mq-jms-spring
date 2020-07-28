@@ -16,15 +16,21 @@ package sample1;
 
 import org.springframework.jms.annotation.JmsListener;
 import org.springframework.stereotype.Component;
+import javax.jms.Message;
+import javax.jms.TextMessage;
+import com.ibm.jms.JMSMessage;
 
 @Component
 public class Listener {
   static boolean warned = false;
 
   @JmsListener(destination = Application.qName)
-  public void receiveMessage(String msg) {
+  public void receiveMessage(Message msg) {
     infinityWarning();
-
+    if (!(msg instanceof JMSMessage)) {
+        System.out.println(">>>>>>> THIS IS JMS <<<<<<<<í");    
+    };
+    if (!(msg instanceof TextMessage)) return;
     System.out.println();
     System.out.println("========================================");
     System.out.println("Received message is: " + msg);
