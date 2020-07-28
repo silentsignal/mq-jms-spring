@@ -16,18 +16,24 @@ package sample1;
 
 import org.springframework.jms.annotation.JmsListener;
 import org.springframework.stereotype.Component;
+import javax.jms.ObjectMessage;
+import javax.jms.JMSException;
 
 @Component
 public class Listener {
   static boolean warned = false;
 
   @JmsListener(destination = Application.qName)
-  public void receiveMessage(Sample msg) {
+  public void receiveMessage(ObjectMessage msg){
     infinityWarning();
-    System.out.println();
-    System.out.println("========================================");
-    System.out.println("Received message is: "+msg.foo);
-    System.out.println("========================================");
+    try{
+        System.out.println();
+        System.out.println("========================================");
+        System.out.println("Received message is: "+((Sample)msg.getObject()).foo);
+        System.out.println("========================================");
+    }catch(JMSException jmse){
+        System.out.println(jmse.toString());    
+    }
 
   }
 
