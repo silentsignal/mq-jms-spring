@@ -19,21 +19,23 @@ import org.springframework.stereotype.Component;
 import javax.jms.Message;
 import javax.jms.TextMessage;
 import com.ibm.jms.JMSMessage;
+import javax.jms.JMSException;
+import java.util.concurrent.TimeUnit;
 
 @Component
 public class Listener {
   static boolean warned = false;
 
   @JmsListener(destination = Application.qName)
-  public void receiveMessage(Message msg) {
+  public void receiveMessage(JMSMessage msg) throws JMSException, InterruptedException{
     infinityWarning();
-    if (!(msg instanceof JMSMessage)) {
-        System.out.println(">>>>>>> THIS IS JMS <<<<<<<<í");    
-    };
+    System.out.println(">>>> Received JMSMEssage, wait a bit...");
+    TimeUnit.SECONDS.sleep(10);
+    Integer len = new Integer(msg.getBody(byte[].class).length);
     if (!(msg instanceof TextMessage)) return;
     System.out.println();
     System.out.println("========================================");
-    System.out.println("Received message is: " + msg);
+    System.out.println("Received message is: " + len.toString());
     System.out.println("========================================");
 
   }
