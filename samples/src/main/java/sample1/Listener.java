@@ -31,13 +31,17 @@ public class Listener {
     infinityWarning();
     System.out.println(">>>> Received JMSMEssage, wait a bit...");
     TimeUnit.SECONDS.sleep(10);
-    Integer len = new Integer(msg.getBody(byte[].class).length);
+    Integer len=getMsgLength(msg);
     if (!(msg instanceof TextMessage)) return;
     System.out.println();
     System.out.println("========================================");
     System.out.println("Received message is: " + len.toString());
     System.out.println("========================================");
 
+  }
+
+  private Integer getMsgLength(JMSMessage msg) throws JMSException{
+     return new Integer(msg.getBody(byte[].class).length);  
   }
 
   void infinityWarning() {
